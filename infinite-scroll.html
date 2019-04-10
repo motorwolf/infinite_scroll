@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Infinite Scroll</title>
+    <style>
+      #container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: 100px;
+        max-width: 1000px;
+        background-color: pink;
+      }
+      img {
+        width: 200px;
+        height: 200px;
+      }
+    </style>
+</head>
+<body>
+<div id="container">
+    <img src="http://api.adorable.io/avatars/123"/>
+</div>
+<script>
+    const addImages = (x) => {
+      let imgs = "";
+      for(let i = 0; i < x; i++){
+        imgs += `<img src="http://api.adorable.io/avatars/${i}"/>`;
+      }
+      return imgs;
+    }
+    const container = document.getElementById('container');
+    container.innerHTML += addImages(30);
+    let totalSize = 800;
+    window.addEventListener('scroll', (e) => {
+      if(window.scrollY > totalSize){
+         container.innerHTML += addImages(20);
+         totalSize += 800;
+      }
+    });
+</script>
+</body>
+</html>
